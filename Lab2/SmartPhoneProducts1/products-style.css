@@ -1,0 +1,33 @@
+body {
+    width: 800px; margin: 0 auto;
+    
+}
+
+img {
+    width: 250px;
+    height: 200px;
+}
+
+p {
+    text-align: center;
+    font: Arial;
+    font-size: 3vw;
+    color: wheat;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
+main {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    background-image: url("images/phone_globe.jpg");
+    background-repeat: no-repeat;
+
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p {
+            color:blue;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <form action="./Example.html" method="get">
+        <p id="demo"></p>
+        <script>
+            var d = new Date();
+            document.getElementById("demo").innerHTML = d;
+        </script>
+
+        <p>Name:</p>
+        <p><input name="name" value="Your name"></p>
+        
+        <p>Comments: </p>
+        <p><textarea rows="10" cols="20" name="comments">Your comments</textarea></p>
+        
+        <p>What is your favorite color?</p>
+        <p><input type="radio" name="areyou" value="Green"> Green</p>
+        <p><input type="radio" name="areyou" value="Yellow"> Yellow</p>
+        <p><input type="radio" name="areyou" value="Blue"> Blue</p>
+        <p><input type="radio" name="areyou" value="Dinosaur" checked> Dinosaur</p>
+        
+        <p><input type="submit" onclick="alert('Thanks!')"></p>
+</body>
+</html>
