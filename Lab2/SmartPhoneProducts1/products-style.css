@@ -1,0 +1,49 @@
+/* General */  
+body {
+    width: 800px; 
+    margin: 0 auto;
+}
+
+img {
+    border: 1px solid #ddd;
+    /* Gray border */
+    border-radius: 4px;
+    /* Rounded border */
+    padding: 5px;
+    /* Some padding */
+    width: 150px;
+    /* Set a small width */
+}
+
+/* Add a hover effect (blue shadow) */
+img:hover {
+    box-shadow: 0 0 5px 1px black;
+}
+
+main {
+    display: flex;
+    flex-flow: row wrap; 
+    justify-content: space-around;
+    background-image: url("images/phone_globe.jpg");
+    background-repeat: no-repeat;
+}
+
+p {
+    text-align: center;
+    font: Arial;
+    font-size: 3vw;
+    color: wheat;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
+div {
+    border: 5px solid black;
+    display: flex;
+}
