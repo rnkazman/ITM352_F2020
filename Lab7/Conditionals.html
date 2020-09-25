@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conditionals</title>
+</head>
+<body>
+    <H1>Invoice</H1>
+    <script>
+        var state = 'CA';                       // Retrieved from user profile
+        switch (state) {
+            case 'HI':
+                taxRate = 0.0417;
+                break;
+            case 'CA':
+                taxRate = 0.08;
+                break;
+            case 'VT':
+                taxRate = 0.0;
+                break;
+            default:
+                taxRate = 0.02;
+                break;
+        }
+
+        /* 
+        This program outputs a customer invoice.
+        Date: Sept. 25, 2020
+        Author: Rick Kazman
+        */
+
+        var subTotal = 120;      // Sub-total from previous page
+        var grandTotal = 0;
+        var taxExempt = false;   // Tax exempt status
+        var taxOwing = 0;
+        var discountRate = 0.1;     // Discount rate for tax-exempt businesses
+
+        var subTotalOut = `Your sub-total is $ ${subTotal}`;
+        document.write(subTotalOut);
+        document.write('<BR>');
+
+        if (taxExempt == true && subTotal > 100)    // Calculate discount, if applicable
+        {
+            discount = subTotal * discountRate;
+            document.write(`Congratulations! You get a discount of $ ${discount}<BR>`);
+            subTotal -= discount;
+        }
+
+        if (taxExempt == true) {    // Tax exempt; print message
+            document.write("You are tax exempt<BR>");
+        }
+        else {                      // Calculate tax owing
+            taxOwing = subTotal * taxRate;
+            taxOut = taxOwing.toFixed(2);
+            var taxOwingOut = `You owe: $ ${taxOut} in tax<BR>`;
+            document.write(taxOwingOut);
+        }
+
+        grandTotal = subTotal + taxOwing;
+
+        var totalOut = `Your grand total is: $ ${grandTotal}`;
+        document.write(totalOut);
+    </script>
+</body>
+</html>
