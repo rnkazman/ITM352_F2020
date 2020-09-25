@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Invoice</h1>
+    
+    <script>
+        state = 'HI';
+        switch (state)
+        {
+            case 'HI':
+                taxRate = 0.0417;
+                break; 
+            case 'CA':
+                taxRate = 0.08;
+                break;
+            default:
+                taxRate = 0.00;
+                break;
+        }
+
+        taxExempt = false;           // Is this a tax-exempt customer?
+        subTotal = 120;              // Sub-total from [some earlier computation]
+        taxRate = 0.05;             // State tax rate [calculated earlier]
+        discountRate = 0.1;         // Discount for big, tax-exempt purchases
+        subTotalOut = `Your sub-total is: ${subTotal}<BR>`;
+        document.write(subTotalOut);
+
+        // Calculate discount, if applicable
+        if (taxExempt && subTotal > 100)
+        {
+            discount = subTotal * discountRate; 
+            subTotal -= discount;
+            document.write(`Congratulations! You get a discount of ${discount}<BR>`);
+        }
+
+        // Calculate tax, if applicable
+        if (taxExempt == false)
+        {
+            taxOwing = subTotal * taxRate;
+            taxOut = "$" + taxOwing.toFixed(2);
+            document.write(`You owe ${taxOut} in taxes<BR>`);
+            grandTotal = subTotal * (1 + taxRate);
+        } else
+        {
+            document.write("You are tax exempt<BR>")
+            grandTotal = subTotal;
+        }
+
+        // Output the grand total
+        totalOut = `Your total is: ${grandTotal}`;
+        document.write(totalOut);
+
+    </script>
+</body>
+</html>
