@@ -1,5 +1,5 @@
 // Make a robot move around the grid
-for (steps=0; steps<50; steps++)
+while (true)
 {   
     await sleep(200);
     if (controller.move() == false)
