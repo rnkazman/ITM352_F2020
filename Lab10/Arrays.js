@@ -6,7 +6,7 @@ var my_kid1 = {
     "name": "James",
     "age": 6,
     "weight": 59.5
-} ;
+} ; 
 
 var my_kid2 = {
     "name": "Goober",
