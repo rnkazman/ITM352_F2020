@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TicTacToe</title>
+</head>
+<body>
+    <H1>Tic Tac Toe Board</H1>
+    <table border=3>
+    <script>
+        TicTacToe = [["x", "o", "x"], ["o", "x", "o"], ["x", "o", "o"]];
+        for (i = 0; i<TicTacToe.length; i++) {
+            document.write("<tr>");
+            for (j = 0; j<TicTacToe[i].length; j++) {
+                document.write(`<td>${TicTacToe[i][j]}</td>`);
+            }
+            document.write("</tr>");
+        }
+    </script>
+    </table>
+</body>
+</html>
