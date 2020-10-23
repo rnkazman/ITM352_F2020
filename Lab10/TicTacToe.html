@@ -7,17 +7,28 @@
 </head>
 <body>
     <H1>Tic Tac Toe Board</H1>
+
     <table border=3>
+
     <script>
-        TicTacToe = [["x", "o", "x"], ["o", "x", "o"], ["x", "o", "o"]];
-        for (i = 0; i<TicTacToe.length; i++) {
-            document.write("<tr>");
-            for (j = 0; j<TicTacToe[i].length; j++) {
-                document.write(`<td>${TicTacToe[i][j]}</td>`);
-            }
-            document.write("</tr>");
+//    var board = [row1, row2, row3];
+    var board = [["x", "x", "o"], ["x", "o", "o"], ["o", "x", "x"]];
+    var row1 = ["x", "x", "o"];
+    var row2 = ["x", "o", "o"];
+    var row3 = ["o", "x", "x"];
+    
+    for (rowNum = 0; rowNum < board.length; rowNum++) {
+        // start new row
+        document.write("<tr>");
+        for (col = 0; col < board[rowNum].length; col++) {
+            // print the cell
+            document.write("<td>" + board[rowNum][col] + "</td>");
         }
+        document.write("</tr>");
+    }
+
     </script>
+
     </table>
 </body>
 </html>
