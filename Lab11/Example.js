@@ -18,3 +18,16 @@ function isNonNegInt(stringToCheck, returnErrors = false) {
 for (i = 0; i < values.length; i++) {
     console.log("String \'" + values[i] + "\' is " + isNonNegInt(values[i],true).join("||"));
 }
+
+
+function callback(item, index) {
+    returnedErrors = isNonNegInt(item,true).join("||");
+    if (returnedErrors.length == 0) {
+        console.log("Item \'" + item + "\' at index " + index + " is good");  
+    } else {
+        console.log("Item \'" + item + "\' at index " + index + " is " + returnedErrors);
+    } 
+}
+
+console.log("**************");
+values.forEach(callback);
