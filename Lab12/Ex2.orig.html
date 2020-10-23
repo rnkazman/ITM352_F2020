@@ -7,11 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script>
-        function isNonNegInt(q, returnErrors = false) {
-            errors = []; // assume no errors at first
-            if (Number(q) != q) errors.push('Not a number!'); // Check if string is a number value
-            if (q < 0) errors.push('Negative value!'); // Check if it is non-negative
-            if (parseInt(q) != q) errors.push('Not an integer!'); // Check that it is an integer
+        function isNonNegInt(userString, returnErrors = false) {
+            errors = [];                                                        // Assume no errors at first
+            if (Number(userString) != userString) errors.push('Not a number!'); // Check if string is a number 
+            if (userString < 0) errors.push('Negative value!');                 // Check if non-negative
+            if (parseInt(userString) != userString) errors.push('Not an integer!'); // Check it is an integer
             return returnErrors ? errors : (errors.length == 0);
         }
 
@@ -21,8 +21,8 @@
         }
 
         function displayPurchase() {
-            q = quantity_textbox.value;
-            if (isNonNegInt(q)) {
+            userString = quantity_textbox.value;
+            if (isNonNegInt(userString)) {
                 document.write(`Thank you for purchasing ${q} things!`);
             }
         }
