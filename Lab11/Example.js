@@ -9,19 +9,29 @@ function isNonNegInt(stringToCheck, returnErrors = false) {
    return returnErrors ? errors : (errors.length == 0);
 }
 
-for (i = 0; i < values.length; i++) {
+/* for (i = 0; i < values.length; i++) {
     console.log("String \'" + values[i] + "\' is " + isNonNegInt(values[i],true).join("||"));
 }
-
+*/
+console.log("****************");
 
 function callback(item, index) {
-    returnedErrors = isNonNegInt(item,true).join("||");
-    if (returnedErrors.length == 0) {
-        console.log("Item \'" + item + "\' at index " + index + " is good");  
+    errrorsReturned = isNonNegInt(item,true).join("||");
+    if (errrorsReturned.length == 0) {
+        console.log("String \'" + item + "\' is valid");
     } else {
-        console.log("Item \'" + item + "\' at index " + index + " is " + returnedErrors);
-    } 
+        console.log("String \'" + item + "\' is " + errrorsReturned);
+    }
 }
 
-console.log("**************");
 values.forEach(callback);
+
+values.forEach(function (item, index) {
+    errrorsReturned = isNonNegInt(item,true).join("||");
+    if (errrorsReturned.length == 0) {
+        console.log("String \'" + item + "\' is valid");
+    } else {
+        console.log("String \'" + item + "\' is " + errrorsReturned);
+    }
+}
+);
