@@ -13,6 +13,7 @@ app.all('*', function (request, response, next) {
 app.post("/process_form", function (request, response) {
     console.log("Got POST");
     let POST = request.body;
+    console.log(request);
     response.send(POST); 
 });
 
