@@ -8,7 +8,8 @@ app.use(myParser.urlencoded({ extended: true }));
 
 
 app.all('*', function (request, response, next) {
-    response.send(request.method + ' to path: ' + request.path);
+    console.log(request.method + ' to ' + request.path);
+    //response.send(request.method + ' to path: ' + request.path);
     next();
 });
 
