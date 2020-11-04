@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercise 2</title>
+    <title>Exercise 4</title>
     <script src="./product_data.js"></script>
 </head>
 
@@ -19,9 +19,9 @@
             return returnErrors ? errors : (errors.length == 0);
         }
 
-        function checkQuantityTextbox() {
-            errs = isNonNegInt(quantity_textbox.value, true);
-            quantity_textbox_message.innerHTML = errs.join(", ");
+        function checkQuantityTextbox(theTextbox) {
+            errs = isNonNegInt(theTextbox.value, true);
+            document.getElementById(theTextbox.name + '_message').innerHTML = errs.join(", ");
         }
 
         function displayPurchase() {
@@ -30,17 +30,22 @@
                 document.write(`Thank you for purchasing ${userInput} lovely things!`);
             }
         }
-        
-        document.write(`<h3>${products[0]["model"]} at \$${products[0]["price"]}</h3>`);
     </script>
-    <H1>Lab 13 Order Page</H1>
-    <form action="/process_form" method="POST">
-    <label for="quantity_textbox">Whaddya want? </label>
-    <input type="text" name="quantity_textbox" onkeyup="checkQuantityTextbox();">
-    <span id="quantity_textbox_message">Enter item quantity</span>
-    <br>
-    <input type="submit" value="Purchase">
-</form>
+    <H1>Lab 13 Ex4 Order Page</H1>
+    <form name='quantity_form' action="http://localhost:8080/process_form" method="POST">
+        <script>
+            for (i in products) {
+                document.write(`<h3>${products[i]["model"]} at \$${products[i]["price"]}</h3>`);
+                document.write(`
+        <label for="quantity_textbox">Quantity Desired:</label>
+        <input type="text" name="quantity_textbox${i}" onkeyup="checkQuantityTextbox(this);">
+        <span id="quantity_textbox${i}_message">Enter a quantity</span>
+        `);
+            }
+        </script>
+        <br>
+        <input type="submit" value='Purchase' name="purchase_submit_button">
+    </form>
 </body>
 
 </html>
