@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exercise 2</title>
+    <script src="./product_data.js"></script>
 </head>
 
 <body>
@@ -29,7 +30,8 @@
                 document.write(`Thank you for purchasing ${userInput} lovely things!`);
             }
         }
-
+        
+        document.write(`<h3>${products[0]["model"]} at \$${products[0]["price"]}</h3>`);
     </script>
     <H1>Lab 13 Order Page</H1>
     <form action="/process_form" method="POST">
