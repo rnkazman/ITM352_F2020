@@ -31,9 +31,10 @@
             }
         }
         
-        document.write(`<h3>${products[0]["model"]} at \$${products[0]["price"]}</h3>`);
+    document.write(`<h3>${products[0]["model"]} at \$${products[0]["price"]}</h3>`);
     </script>
-    <H1>Lab 13 Order Page</H1>
+
+    <H1>Lab 13 Order Page w/Product data</H1>
     <form action="/process_form" method="POST">
     <label for="quantity_textbox">Whaddya want? </label>
     <input type="text" name="quantity_textbox" onkeyup="checkQuantityTextbox();">
