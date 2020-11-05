@@ -1,6 +1,6 @@
 var fs = require('fs');
 
+data = "This is my third attempt at storing some data!";
 filename = "info.dat";
-data = "\nThis is an appendage.";
 
-fs.appendFileSync(filename, data, "utf-8");
+fs.writeFileSync(filename, data, "utf-8");

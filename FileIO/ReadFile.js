@@ -1,11 +1,12 @@
-var fs = require('fs');
+var fs = require('fs');
 
-filename = "info.dat";
+var filename = "info.dat";
 
 if (fs.existsSync(filename)) {	
     data = fs.readFileSync(filename, 'utf-8');
-    console.log("Success! we got: " + data);
+    console.log("Success! We got: " + data);
 } else
 {
-    console.log("Sorry, file not found.");
+    console.log("Sorry bud. File " + filename + " does not exist");
 }
+

@@ -8,6 +8,7 @@ products = [
         "price": 240.00
     }
 ];
+
 if (typeof module != 'undefined') {
     module.exports.products = products;
 }
