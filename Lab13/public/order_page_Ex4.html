@@ -37,7 +37,7 @@
             for (i in products) {
                 document.write(`<h3>${products[i]["model"]} at \$${products[i]["price"]}</h3>`);
                 document.write(`
-        <label for="quantity_textbox">Quantity Desired:</label>
+        <label for="quantity_textbox">quantity desired:</label>
         <input type="text" name="quantity_textbox${i}" onkeyup="checkQuantityTextbox(this);">
         <span id="quantity_textbox${i}_message">Enter a quantity</span>
         `);
