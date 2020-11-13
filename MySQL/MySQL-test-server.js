@@ -37,7 +37,7 @@ function query_DB(POST, response) {
     query = "SELECT * FROM Room where price > " + low + " and price < " + high;  // Build the query string
     con.query(query, function (err, result, fields) {   // Run the query
       if (err) throw err;
-      // console.log(result);
+      console.log(result);
       var res_string = JSON.stringify(result);
       var res_json = JSON.parse(res_string);
       console.log(res_json);
