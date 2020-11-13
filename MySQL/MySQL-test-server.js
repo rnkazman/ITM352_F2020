@@ -40,6 +40,7 @@ function query_DB(POST, response) {
       // console.log(result);
       var res_string = JSON.stringify(result);
       var res_json = JSON.parse(res_string);
+      console.log(res_json);
 
       // Now build the response: table of results and form to do another query
       response_form = `<form action="Room-query.html" method="GET">`;
