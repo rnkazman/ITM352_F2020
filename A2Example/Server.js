@@ -32,7 +32,7 @@ function process_quantity_form(POST, response) {
 
             let model = products[i]['model'];
             let model_price = products[i]['price'];
-            if (isNonNegInt(q)) {
+            if (isNonNegInt(q) && q > 0) {
                 receipt += eval('`' + contents + '`'); // render template string
             } else {
                 receipt += `<h3><font color="red">${q} is not a valid quantity for ${model}!</font></h3>`;
