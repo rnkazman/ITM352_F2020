@@ -1,11 +1,14 @@
 var express = require('express');
 var app = express();
 var myParser = require("body-parser");
-var data = require('./public/product_data.js');
-var products = data.products;
 var fs = require('fs');
+const { exit } = require('process');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
 
-app.use(express.static('./public'));
+app.use(cookieParser());
+app.use(session({secret: "ITM352 rocks!", saveUninitialized: false, resave: false}));
+
 app.use(myParser.urlencoded({ extended: true }));
 
 var filename = "user_data.json";
@@ -15,54 +18,30 @@ if (fs.existsSync(filename)) {
     //console.log("Success! We got: " + data);
 
     user_data = JSON.parse(data);
-    console.log("User_data=", user_data);
+    //console.log("User_data=", user_data);
 } else {
     console.log("Sorry can't read file " + filename);
+    exit();
 }
 
-var save_data = [] ;
-var receipt = "";
+app.get("/set_cookie", function (request, response) {
+    // Set a cookie called myname to be my name
+    response.cookie('myname', 'Rick Kazman', {maxAge: 10000}).send('cookie set');
+}); 
 
-function process_quantity_form(POST, response) {
-    if (typeof POST['purchase_submit_button'] != 'undefined') {
-        var contents = fs.readFileSync('./views/display_quantity_template.view', 'utf8');
-        for (i in products) {
-            let q = POST[`quantity_textbox${i}`];
-            save_data[i] = q;
-
-            let model = products[i]['model'];
-            let model_price = products[i]['price'];
-            if (isNonNegInt(q) && q > 0) {
-                receipt += eval('`' + contents + '`'); // render template string
-            } else {
-                receipt += `<h3><font color="red">${q} is not a valid quantity for ${model}!</font></h3>`;
-            }
-        }
-        /*response.send(receipt);
-        response.end(); */
+app.get("/use_cookie", function (request, response) {
+    // Use the cookie, if it has been set
+    output = "No myname cookie found";
+    if (typeof request.cookies.myname != 'undefined') {
+        output = `Welcome to the Use Cookie page ${request.cookies.myname}`;
     }
-}
+    response.send(output);
+}); 
 
-function isNonNegInt(stringToCheck, returnErrors = false) {
-    errors = []; // assume no errors at first
-    if (Number(stringToCheck) != stringToCheck) errors.push('Not a number!'); // Check if string is a number value
-    if (stringToCheck < 0) errors.push('Negative value!'); // Check if it is non-negative
-    if (parseInt(stringToCheck) != stringToCheck) errors.push('Not an integer!'); // Check that it is an integer
-
-    return returnErrors ? errors : (errors.length == 0);
-}
-
-app.all('*', function (request, response, next) {
-    console.log(request.method + ' to ' + request.path);
-    next();
-});
-
-app.post("/process_form", function (request, response) {
-    let POST = request.body;
-    process_quantity_form(POST, response);
-    response.redirect("login");
-});
-
+app.get("/use_session", function (request, response) {
+    // Print the value of the session ID
+    response.send(`Welcome.  Your session ID is: ${request.session.id}`);
+}); 
 
 app.get("/login", function (request, response) {
     // Give a simple login form
@@ -85,7 +64,16 @@ app.post("/login", function (request, response) {
     user_name_from_form = POST["username"];
     console.log("User name from form=" + user_name_from_form);
     if (user_data[user_name_from_form] != undefined) {
-        response.send(receipt);
+        //response.send(`<H3> User ${POST["username"]} logged in`);
+        if (typeof request.session.last_login != 'undefined') {
+            var msg = `You last logged in at ${request.session.last_login}`;
+            var now = new Date();
+        } else {
+            var msg = '';
+            var now = 'first visit!';
+        }
+        request.session.last_login = now;
+        response.cookie('username', user_name_from_form).send(`${msg}<BR>${user_name_from_form} logged in at ${now}`);
     } else {
         response.send(`Sorry Charlie!`);
     }
