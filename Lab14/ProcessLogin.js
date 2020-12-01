@@ -3,10 +3,13 @@ var app = express();
 var myParser = require("body-parser");
 var fs = require('fs');
 const { exit } = require('process');
+var queryString = require(‘query-string’);
+
 
 app.use(myParser.urlencoded({ extended: true }));
 
 var filename = "user_data.json";
+var user_logged_in_name = "" ;  // Global variable to save user name
 
 if (fs.existsSync(filename)) {
     data = fs.readFileSync(filename, 'utf-8');
@@ -38,8 +41,17 @@ app.post("/login", function (request, response) {
     console.log("Got a POST login request");
     POST = request.body;
     user_name_from_form = POST["username"];
+    password_from_from = POST["password"];
     console.log("User name from form=" + user_name_from_form);
     if (user_data[user_name_from_form] != undefined) {
+        // Check if password entered matches the password on file
+        if (user_data[user_name_from_form].password.equals(password_from_from))
+        {
+            // Good login
+            user_logged_in_name = user_name_from_form;
+            stringified = queryString.stringify(request.body);  // or request.query if using GET
+            response.redirect("./invoice.html?" + stringified); 
+        }
         response.send(`<H3> User ${POST["username"]} logged in`);
     } else {
         response.send(`Sorry Charlie!`);
