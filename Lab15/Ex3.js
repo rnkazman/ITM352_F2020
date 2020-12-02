@@ -138,6 +138,15 @@ app.get("/register", function (request, response) {
     response.send(str);
 });
 
+// Print invoice only if the user is logged in
+app.get("/invoice", function (request, response) {
+    if (typeof request.session.username != 'undefined') {
+        response.send(`***Invoice for ${request.session.username} goes here***`);
+    } else {
+        response.send("Login first bozo!");
+    }
+});
+
 // Process the user registration information and save it in the user data file
 app.post("/register", function (request, response) {
     // process a simple register form
