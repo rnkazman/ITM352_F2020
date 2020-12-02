@@ -1,3 +1,9 @@
+/*
+ *  Author: Rick Kazman
+ *  Date Created: 12/1/20
+ *  Purpose: Example code for how to use sessions and cookies.
+ */
+
 var express = require('express');
 var app = express();
 var myParser = require("body-parser");
@@ -11,6 +17,7 @@ app.use(session({ secret: "ITM352 rocks!", saveUninitialized: false, resave: fal
 
 app.use(myParser.urlencoded({ extended: true }));
 
+// Read user data file.
 var filename = "user_data.json";
 
 if (fs.existsSync(filename)) {
@@ -24,6 +31,7 @@ if (fs.existsSync(filename)) {
     exit();
 }
 
+// Simple example of how sessions can store data between requests
 app.get('/', function (req, res) {
     if (req.session.page_views) {
         req.session.page_views++;
@@ -41,11 +49,13 @@ app.get('/', function (req, res) {
     }
 });
 
+// Simple example of settin a cookie
 app.get("/set_cookie", function (request, response) {
     // Set a cookie called myname to be my name
     response.cookie('myname', 'Rick Kazman', { maxAge: 10000 }).send('cookie set');
 });
 
+// Using the cookie that was set in /set_cookie
 app.get("/use_cookie", function (request, response) {
     // Use the cookie, if it has been set
     output = "No myname cookie found";
@@ -55,11 +65,20 @@ app.get("/use_cookie", function (request, response) {
     response.send(output);
 });
 
+// Simple example of printing out a session ID
 app.get("/use_session", function (request, response) {
     // Print the value of the session ID
     response.send(`Welcome.  Your session ID is: ${request.session.id}`);
 });
 
+// Simple example of destroying a session 
+app.get("/destroy_session", function (request, response) {
+    // Print the value of the session ID
+    request.session.destroy();
+    response.send("Session nuked!");
+});
+
+// Create a login form for the user
 app.get("/login", function (request, response) {
     // Give a simple login form
     str = `
@@ -74,13 +93,15 @@ app.get("/login", function (request, response) {
     response.send(str);
 });
 
+// Handle the login form information, including session the session variables for username and last_login
 app.post("/login", function (request, response) {
-    // Process login form POST and redirect to logged in page if ok, back to login page if not
-    console.log("Got a POST login request");
+    // First save the request and, in particular, the username and password
     POST = request.body;
     user_name_from_form = POST["username"];
     password_from_form = POST["password"];
-    console.log("User name from form=" + user_name_from_form);
+    // console.log("User name from form=" + user_name_from_form);
+
+    // Now check to see if the username and password match what is on file
     if (user_data[user_name_from_form] != undefined) {
         password_on_file = user_data[user_name_from_form].password;
         if (password_from_form == password_on_file) {
@@ -101,8 +122,8 @@ app.post("/login", function (request, response) {
     }
 });
 
+// Create simple registration form
 app.get("/register", function (request, response) {
-    // Give a simple register form
     str = `
 <body>
 <form action="/register" method="POST">
@@ -117,6 +138,7 @@ app.get("/register", function (request, response) {
     response.send(str);
 });
 
+// Process the user registration information and save it in the user data file
 app.post("/register", function (request, response) {
     // process a simple register form
     POST = request.body;
