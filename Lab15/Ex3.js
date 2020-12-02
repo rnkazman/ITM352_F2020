@@ -36,11 +36,11 @@ app.get('/', function (req, res) {
     if (req.session.page_views) {
         req.session.page_views++;
         console.log(req.session);
-        if (req.session.username != 'undefined') {
+        if (req.session.username) {
             user = req.session.username;
         }
         else {
-            user = "";
+            user = "Not logged in";
         }
         res.send(`Welcome back ${user}. This is visit # ${req.session.page_views}`);
     } else {
