@@ -62,7 +62,7 @@ app.get("/use_cookie", function (request, response) {
     if (typeof request.cookies.myname != 'undefined') {
         output = `Welcome to the Use Cookie page ${request.cookies.myname}`;
     }
-    response.send(output);  
+    response.send(output);
 });
 
 // Simple example of printing out a session ID
@@ -82,14 +82,17 @@ app.get("/destroy_session", function (request, response) {
 app.get("/login", function (request, response) {
     // Give a simple login form
     str = `
-<body>
-<form action="/login" method="POST">
-<input type="text" name="username" size="40" placeholder="enter username" ><br />
-<input type="password" name="password" size="40" placeholder="enter password"><br />
-<input type="submit" value="Submit" id="submit">
-</form>
-</body>
-    `;
+        <body>
+        <form action="/login" method="POST">
+        <input type="text" name="username" size="40" placeholder="enter username"`;
+    if (request.session.username) {
+        str += ` value=${request.session.username}`; 
+    }
+    str += `><br />
+        <input type="password" name="password" size="40" placeholder="enter password"><br />
+        <input type="submit" value="Submit" id="submit">
+        </form>
+        </body>`;
     response.send(str);
 });
 
