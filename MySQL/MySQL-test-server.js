@@ -3,12 +3,12 @@ var app = express();
 var myParser = require("body-parser");
 var mysql = require('mysql');
 
-console.log("Connecting to localhost...");
+console.log("Connecting to localhost..."); 
 var con = mysql.createConnection({
   host: '127.0.0.1',
   user: "root",
   port: 3306,
-  database: "TestTravel",
+  database: "Travel",
   password: ""
 });
 
